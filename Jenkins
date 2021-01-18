@@ -1,0 +1,31 @@
+pipeline{
+        agent any 
+        tools
+        {
+        	maven 'M3'
+        	jdk 'java'	
+        }
+stages{
+        stage('Build'){
+         steps{
+         	sh 'mvn compile'
+         }
+       }
+       
+       stage('QA with SonarQube')
+       {
+       		steps{
+       			withSonarQubeEnv('SonarQube'){
+       			sh 'mvn clean package sonar:sonar'
+       			 }
+   			}
+       }
+       
+ stage('Deploy')
+      {
+      	steps{
+        sh 'ansible-playbook demo.yml'	
+       	}
+       }  
+     }     
+  }
