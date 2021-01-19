@@ -24,7 +24,16 @@ stages{
        			sh 'mvn clean package sonar:sonar'
        			 }
    			}
-       }
+       } 
+        
+stage('Check Logs')
+        {
+         steps
+                {
+                 filterLogs ('WARNING',1)       
+                }
+        }
+        
  stage('Deploy')
       {
       	steps{
