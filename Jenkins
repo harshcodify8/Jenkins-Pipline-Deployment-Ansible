@@ -27,7 +27,7 @@ stage('Check Logs')
          
                 steps
                 {
-                 filterLogs ('WARNING',1)       
+                 filterLogs ('WARNING',3)       
                 }
        }         
 stage('Upload War To Nexus'){
